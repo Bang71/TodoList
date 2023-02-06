@@ -9,12 +9,18 @@ import SwiftUI
 
 struct ListView: View {
     @ObservedObject private var viewModel = ListViewModel()
+    @State private var isShowingSheet = false
     
     var body: some View {
-        List($viewModel.todos, editActions: [.delete, .move]) { $todo in
-            Text(todo.title)
+        NavigationStack {
+            List($viewModel.todos, editActions: [.delete, .move]) { $todo in
+                NavigationLink(todo.title) {
+                    DetailView(todo: todo)
+                }
                 .foregroundColor(todo.isComplete ? .gray : .black)
                 .strikethrough(todo.isComplete, color: .gray)
+            }
+            .navigationTitle("TodoList")
         }
     }
 }
