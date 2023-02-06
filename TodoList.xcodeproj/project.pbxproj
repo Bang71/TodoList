@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		C19C36BB2990C5540086E539 /* TodoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19C36BA2990C5540086E539 /* TodoListApp.swift */; };
-		C19C36BD2990C5540086E539 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19C36BC2990C5540086E539 /* ContentView.swift */; };
 		C19C36BF2990C5550086E539 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C19C36BE2990C5550086E539 /* Assets.xcassets */; };
 		C19C36C22990C5550086E539 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C19C36C12990C5550086E539 /* Preview Assets.xcassets */; };
 		C19C36CC2990C5550086E539 /* TodoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19C36CB2990C5550086E539 /* TodoListTests.swift */; };
 		C19C36D62990C5550086E539 /* TodoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19C36D52990C5550086E539 /* TodoListUITests.swift */; };
 		C19C36D82990C5550086E539 /* TodoListUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19C36D72990C5550086E539 /* TodoListUITestsLaunchTests.swift */; };
+		C19C36ED2990D21D0086E539 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19C36EC2990D21D0086E539 /* Todo.swift */; };
+		C19C36EF2990E0550086E539 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19C36EE2990E0550086E539 /* ListView.swift */; };
+		C19C36F22990E5CD0086E539 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19C36F12990E5CD0086E539 /* ListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +38,6 @@
 /* Begin PBXFileReference section */
 		C19C36B72990C5540086E539 /* TodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19C36BA2990C5540086E539 /* TodoListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListApp.swift; sourceTree = "<group>"; };
-		C19C36BC2990C5540086E539 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C19C36BE2990C5550086E539 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C19C36C12990C5550086E539 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C19C36C72990C5550086E539 /* TodoListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +45,9 @@
 		C19C36D12990C5550086E539 /* TodoListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19C36D52990C5550086E539 /* TodoListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListUITests.swift; sourceTree = "<group>"; };
 		C19C36D72990C5550086E539 /* TodoListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C19C36EC2990D21D0086E539 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		C19C36EE2990E0550086E539 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		C19C36F12990E5CD0086E539 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +99,8 @@
 			isa = PBXGroup;
 			children = (
 				C19C36BA2990C5540086E539 /* TodoListApp.swift */,
-				C19C36BC2990C5540086E539 /* ContentView.swift */,
+				C19C36EA2990D0DA0086E539 /* Feature */,
+				C19C36EB2990D0E70086E539 /* Model */,
 				C19C36BE2990C5550086E539 /* Assets.xcassets */,
 				C19C36C02990C5550086E539 /* Preview Content */,
 			);
@@ -125,6 +130,31 @@
 				C19C36D72990C5550086E539 /* TodoListUITestsLaunchTests.swift */,
 			);
 			path = TodoListUITests;
+			sourceTree = "<group>";
+		};
+		C19C36EA2990D0DA0086E539 /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				C19C36F02990E5BD0086E539 /* List */,
+			);
+			path = Feature;
+			sourceTree = "<group>";
+		};
+		C19C36EB2990D0E70086E539 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C19C36EC2990D21D0086E539 /* Todo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C19C36F02990E5BD0086E539 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				C19C36EE2990E0550086E539 /* ListView.swift */,
+				C19C36F12990E5CD0086E539 /* ListViewModel.swift */,
+			);
+			path = List;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,7 +287,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C19C36BD2990C5540086E539 /* ContentView.swift in Sources */,
+				C19C36EF2990E0550086E539 /* ListView.swift in Sources */,
+				C19C36ED2990D21D0086E539 /* Todo.swift in Sources */,
+				C19C36F22990E5CD0086E539 /* ListViewModel.swift in Sources */,
 				C19C36BB2990C5540086E539 /* TodoListApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
