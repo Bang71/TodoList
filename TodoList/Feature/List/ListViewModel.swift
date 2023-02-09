@@ -6,15 +6,17 @@
 //
 
 import Foundation
+import CoreData
 
 class ListViewModel: ObservableObject {
-    @Published var todos: [Todo]
+    @Published var items = [TodoItem]()
     
-    init() {
-        self.todos = [
-            Todo(title: "Todo Example", description: "Test", isComplete: false),
-            Todo(title: "Todo Example2", description: "Test", isComplete: true)
-            
-        ]
+    init(context: NSManagedObjectContext) {
+        let fetchRequest = NSFetchRequest<TodoItem>(entityName: "TodoItem")
+        do {
+            items = try context.fetch(fetchRequest)
+        } catch {
+            print("Fetch failed")
+        }
     }
 }

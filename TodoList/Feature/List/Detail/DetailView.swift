@@ -9,28 +9,28 @@ import SwiftUI
 
 struct DetailView: View {
     @ObservedObject var viewModel = DetailViewModel()
-    @State var todo: Todo
+//    @State var todo: Todo
     
     var body: some View {
         Form {
-            Section {
-                TextField("Title", text: $todo.title) {
-                    
-                }
-            }
-            Section {
-                TextField("Description", text: $todo.description) {
-                    
-                }
-            }
-            Section() {
-                HStack {
-                    Text("Complete")
-                    Toggle(isOn: $todo.isComplete) {
-                        
-                    }
-                }
-            }
+//            Section {
+//                TextField("Title", text: $todo.title) {
+//
+//                }
+//            }
+//            Section {
+//                TextField("Description", text: $todo.description) {
+//
+//                }
+//            }
+//            Section() {
+//                HStack {
+//                    Text("Complete")
+//                    Toggle(isOn: $todo.isComplete) {
+//
+//                    }
+//                }
+//            }
         }
         .navigationTitle("Detail")
     }
@@ -38,6 +38,7 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(todo: Todo(title: "temp", description: "", isComplete: false))
+//        DetailView(todo: Todo(title: "temp", description: "", isComplete: false))
+        DetailView()
     }
 }

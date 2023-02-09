@@ -6,27 +6,34 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ListView: View {
-    @ObservedObject private var viewModel = ListViewModel()
-    @State private var isShowingSheet = false
+//    @Environment(\.managedObjectContext) private var context
+    
+    @ObservedObject private var viewModel: ListViewModel
+    
+    init(context: NSManagedObjectContext) {
+        self.viewModel = ListViewModel(context: context)
+            
+    }
     
     var body: some View {
         NavigationStack {
-            List($viewModel.todos, editActions: [.delete, .move]) { $todo in
-                NavigationLink(todo.title) {
-                    DetailView(todo: todo)
-                }
-                .foregroundColor(todo.isComplete ? .gray : .black)
-                .strikethrough(todo.isComplete, color: .gray)
-            }
-            .navigationTitle("TodoList")
+//            List($viewModel.todos, editActions: [.delete, .move]) { $todo in
+//                NavigationLink(todo.title) {
+//                    DetailView(todo: todo)
+//                }
+//                .foregroundColor(todo.isComplete ? .gray : .black)
+//                .strikethrough(todo.isComplete, color: .gray)
+//            }
+//            .navigationTitle("TodoList")
         }
     }
 }
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView()
+        ListView(context: CoreDataStack.shared.persistentContainer.viewContext)
     }
 }
