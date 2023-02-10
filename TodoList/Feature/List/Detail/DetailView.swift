@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct DetailView: View {
-    @ObservedObject var viewModel = DetailViewModel()
-//    @State var todo: Todo
+//    @ObservedObject var viewModel = DetailViewModel()
+//    @State var item: TodoItem
     
     var body: some View {
         Form {
@@ -36,9 +36,9 @@ struct DetailView: View {
     }
 }
 
-struct DetailView_Previews: PreviewProvider {
-    static var previews: some View {
-//        DetailView(todo: Todo(title: "temp", description: "", isComplete: false))
-        DetailView()
-    }
-}
+//struct DetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+////        DetailView(todo: Todo(title: "temp", description: "", isComplete: false))
+////        DetailView(item: TodoItem())
+//    }
+//}

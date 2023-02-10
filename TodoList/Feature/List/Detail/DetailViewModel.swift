@@ -8,5 +8,26 @@
 import Foundation
 
 class DetailViewModel: ObservableObject {
+    //    @Published var items = [TodoItem]()
+    private var coreDataStack: CoreDataStack
     
+    init(coreDataStack: CoreDataStack) {
+        self.coreDataStack = coreDataStack
+        
+        fetchTodos()
+    }
+    
+    private func fetchTodos() {
+        coreDataStack.fetchItems(type: TodoEntity.self)?.forEach({ result in
+            print(result)
+        })
+    }
+//
+//    func deleteTodo() {
+//        coreDataStack.deleteItem(item: <#T##NSManagedObject#>)
+//    }
+//
+//    func updateTodo() {
+//        coreDataStack.updateItem(item: <#T##TodoEntity#>, params: <#T##[String : Any]#>)
+//    }
 }

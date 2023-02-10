@@ -13,7 +13,7 @@ struct TodoListApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ListView(context: coreDataStack.persistentContainer.viewContext)
+            ListView(coreDataStack: coreDataStack)
         }
     }
 }
