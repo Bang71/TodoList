@@ -12,10 +12,9 @@ class AddViewModel: ObservableObject {
     private var coreDataService = CoreDataService.shared
     
     func addTodo(title: String, memo: String?) {
-        print(#function, title, memo)
         coreDataService.addItem(type: TodoEntity.self,
                                 params: [
-                                    "title" : title,
+                                    "title" : title == "" ? "NONAME" : title,
                                     "memo" : memo ?? ""
                                 ])
     }

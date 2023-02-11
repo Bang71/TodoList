@@ -13,7 +13,7 @@ class DetailViewModel: ObservableObject {
     func updateTodo(item: TodoEntity, title: String, memo: String, isCompleted: Bool) {
         coreDataService.updateItem(item: item,
                                    params: [
-                                    "title" : title,
+                                    "title" : title == "" ? "NONAME" : title,
                                     "memo" : memo,
                                     "isCompleted" : isCompleted
                                    ])
