@@ -11,7 +11,7 @@ import CoreData
 struct ListView: View {
     @ObservedObject private var viewModel: ListViewModel
     @State private var showAddModal = false
-    @State private var showUpdateModal = false
+    @State private var showDetailEntity: TodoEntity?
     
     init() {
         self.viewModel = ListViewModel()
@@ -22,16 +22,16 @@ struct ListView: View {
             List {
                 ForEach($viewModel.items) { $item in
                     Button {
-                        self.showUpdateModal.toggle()
+                        self.showDetailEntity = item
                     } label: {
                         Text(item.title ?? "NONAME")
                             .foregroundColor(item.isCompleted ? .gray : .black)
                             .strikethrough(item.isCompleted, color: .gray)
                     }
-                    .sheet(isPresented: $showUpdateModal, onDismiss: {
+                    .sheet(item: $showDetailEntity) {
                         viewModel.fetchTodos()
-                    }) {
-                        DetailView(showModal: self.$showUpdateModal, item: item)
+                    } content: { detail in
+                        DetailView(showModal: self.$showDetailEntity, item: detail)
                     }
                 }
                 .onDelete(perform: viewModel.deleteTodo)

@@ -9,14 +9,14 @@ import SwiftUI
 
 struct DetailView: View {
     @ObservedObject var viewModel = DetailViewModel()
-    @Binding var showModal: Bool
+    @Binding var showModal: TodoEntity?
     
     var item: TodoEntity
     @State var title: String
     @State var memo: String
     @State var isCompleted: Bool
     
-    init(viewModel: DetailViewModel = DetailViewModel(), showModal: Binding<Bool>, item: TodoEntity) {
+    init(viewModel: DetailViewModel = DetailViewModel(), showModal: Binding<TodoEntity?>, item: TodoEntity) {
         self.viewModel = viewModel
         self._showModal = showModal
         
@@ -46,7 +46,7 @@ struct DetailView: View {
                 Section {
                     Button {
                         viewModel.updateTodo(item: item, title: title, memo: memo, isCompleted: isCompleted)
-                        self.showModal.toggle()
+                        self.showModal = nil
                     } label: {
                         Text("Save")
                     }
@@ -54,7 +54,7 @@ struct DetailView: View {
             }
             .navigationBarTitle(Text("Update Todo"), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
-                self.showModal.toggle()
+                self.showModal = nil
             }) {
                 Text("Cancel").bold()
             })
