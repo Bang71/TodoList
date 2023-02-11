@@ -1,5 +1,5 @@
 //
-//  CoreDataStack.swift
+//  CoreDataService.swift
 //  TodoList
 //
 //  Created by 신병기 on 2023/02/07.
@@ -7,8 +7,8 @@
 
 import CoreData
 
-class CoreDataStack {
-    static let shared = CoreDataStack()
+class CoreDataService {
+    static let shared = CoreDataService()
     
     let container: NSPersistentContainer
     
@@ -21,14 +21,14 @@ class CoreDataStack {
         }
     }
 
-    func fetchItems<T: NSFetchRequestResult>(type: T.Type) -> [T]? {
+    func fetchItems<T: NSFetchRequestResult>(type: T.Type) -> [T] {
         let request = NSFetchRequest<T>(entityName: String(describing: T.self))
         
         do {
             return try container.viewContext.fetch(request)
         } catch {
             print("Fetch failed.")
-            return nil
+            return []
         }
     }
     
@@ -51,7 +51,7 @@ class CoreDataStack {
         saveData()
     }
     
-    func deleteItem(item: NSManagedObject) {
+    func deleteItem(item: TodoEntity) {
         container.viewContext.delete(item)
         saveData()
     }
@@ -65,6 +65,7 @@ class CoreDataStack {
             default: return
             }
         }
+        saveData()
     }
     
     private func saveData() {

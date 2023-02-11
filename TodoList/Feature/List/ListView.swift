@@ -10,27 +10,48 @@ import CoreData
 
 struct ListView: View {
     @ObservedObject private var viewModel: ListViewModel
+    @State private var showAddModal = false
+    @State private var showUpdateModal = false
     
-    init(coreDataStack: CoreDataStack) {
-        self.viewModel = ListViewModel(coreDataStack: coreDataStack)
-//        viewModel.previews()
+    init() {
+        self.viewModel = ListViewModel()
     }
     
     var body: some View {
-        NavigationStack {
-//            List($viewModel.items, editActions: [.delete, .move]) { $item in
-//                NavigationLink(item.title ?? "") {
-//                    DetailView(item: item)
-//                }
-//                .foregroundColor(item.isCompleted ? .gray : .black)
-//                .strikethrough(item.isCompleted, color: .gray)
-//            }
-//            .navigationTitle("TodoList")
+        NavigationView {
+            List {
+                ForEach($viewModel.items) { $item in
+                    Button {
+                        self.showUpdateModal.toggle()
+                    } label: {
+                        Text(item.title ?? "NONAME")
+                            .foregroundColor(item.isCompleted ? .gray : .black)
+                            .strikethrough(item.isCompleted, color: .gray)
+                    }
+                    .sheet(isPresented: $showUpdateModal, onDismiss: {
+                        viewModel.fetchTodos()
+                    }) {
+                        DetailView(showModal: self.$showUpdateModal, item: item)
+                    }
+                }
+                .onDelete(perform: viewModel.deleteTodo)
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        self.showAddModal.toggle()
+                    }) {
+                        Label("Add Item", systemImage: "plus")
+                    }
+                    .sheet(isPresented: $showAddModal, onDismiss: {
+                        viewModel.fetchTodos()
+                    }) {
+                        AddView(showModal: self.$showAddModal)
+                    }
+                }
+            }
+            .navigationTitle("Todo List")
         }
-    }
-    
-    func delete(at offsets: IndexSet) {
-            
     }
 }
 

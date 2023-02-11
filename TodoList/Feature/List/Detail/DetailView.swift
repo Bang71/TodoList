@@ -8,31 +8,57 @@
 import SwiftUI
 
 struct DetailView: View {
-//    @ObservedObject var viewModel = DetailViewModel()
-//    @State var item: TodoItem
+    @ObservedObject var viewModel = DetailViewModel()
+    @Binding var showModal: Bool
+    
+    var item: TodoEntity
+    @State var title: String
+    @State var memo: String
+    @State var isCompleted: Bool
+    
+    init(viewModel: DetailViewModel = DetailViewModel(), showModal: Binding<Bool>, item: TodoEntity) {
+        self.viewModel = viewModel
+        self._showModal = showModal
+        
+        self.item = item
+        self.title = item.value(forKey: "title") as? String ?? ""
+        self.memo = item.value(forKey: "memo") as? String ?? ""
+        self.isCompleted = item.value(forKey: "isCompleted") as? Bool ?? false
+    }
     
     var body: some View {
-        Form {
-//            Section {
-//                TextField("Title", text: $todo.title) {
-//
-//                }
-//            }
-//            Section {
-//                TextField("Description", text: $todo.description) {
-//
-//                }
-//            }
-//            Section() {
-//                HStack {
-//                    Text("Complete")
-//                    Toggle(isOn: $todo.isComplete) {
-//
-//                    }
-//                }
-//            }
+        NavigationView {
+            Form {
+                Section {
+                    TextField("Title", text: $title)
+                }
+                Section {
+                    TextField("Description", text: $memo)
+                }
+                Section {
+                    HStack {
+                        Text("Completed")
+                        Toggle(isOn: $isCompleted) {
+                            
+                        }
+                    }
+                }
+                Section {
+                    Button {
+                        viewModel.updateTodo(item: item, title: title, memo: memo, isCompleted: isCompleted)
+                        self.showModal.toggle()
+                    } label: {
+                        Text("Save")
+                    }
+                }
+            }
+            .navigationBarTitle(Text("Update Todo"), displayMode: .inline)
+            .navigationBarItems(trailing: Button(action: {
+                self.showModal.toggle()
+            }) {
+                Text("Cancel").bold()
+            })
         }
-        .navigationTitle("Detail")
     }
 }
 

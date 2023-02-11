@@ -9,26 +9,21 @@ import Foundation
 import CoreData
 
 class ListViewModel: ObservableObject {
-    //    @Published var items = [TodoItem]()
-    private var coreDataStack: CoreDataStack
+    private var coreDataService = CoreDataService.shared
+    @Published var items: [TodoEntity] = []
     
-    init(coreDataStack: CoreDataStack) {
-        self.coreDataStack = coreDataStack
-        
+    init() {
         fetchTodos()
     }
     
-    private func fetchTodos() {
-        coreDataStack.fetchItems(type: TodoEntity.self)?.forEach({ result in
-            print(result)
-        })
+    func fetchTodos() {
+        items = coreDataService.fetchItems(type: TodoEntity.self)
     }
     
-//    func deleteTodo() {
-//        coreDataStack.deleteItem(item: <#T##NSManagedObject#>)
-//    }
-//
-//    func updateTodo() {
-//        coreDataStack.updateItem(item: <#T##TodoEntity#>, params: <#T##[String : Any]#>)
-//    }
+    func deleteTodo(indexSet: IndexSet) {
+        guard let index = indexSet.first else { return }
+        let item = items[index]
+        coreDataService.deleteItem(item: item)
+        fetchTodos()
+    }
 }
